@@ -30,16 +30,30 @@ const hasDuplicate = arr => {
 const vowelCount = (str) => {
     const arr = [...str];
     return arr.reduce((map, letter) => {
-        const vowels = [...'aeiou'];
-        if (vowels.indexOf(letter) != -1){
-            if(map.has(letter)){
-                let currCount = map.get(letter);
-                map.set(letter, currCount + 1)
-            }
-            else{
-                map.set(letter, 1)
-            }
+        if (isVowel(letter)){
+            map = isMapped(map, letter)
         }
         return map
     }, new Map())
+}
+
+const isVowel = letter => {
+    const vowels = [...'aeiou'];
+        if (vowels.indexOf(letter) != -1){
+            return true
+        }
+        else{
+            return false
+        }
+}
+
+const isMapped = (map, key) => {
+    if (map.has(key)){
+        let currCount = map.get(key)
+        map.set(key, currCount + 1)
+    }
+    else{
+        map.set(key, 1);
+    }
+    return map
 }
